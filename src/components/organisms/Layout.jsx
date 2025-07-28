@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
-import React, { useState, useContext } from "react";
+import { Link, Outlet } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "@/App";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import { cn } from "@/utils/cn";
-import { AuthContext } from "@/App";
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -47,10 +47,10 @@ const Layout = () => {
                 <ApperIcon name="CheckSquare" size={18} />
                 <span>Tasks</span>
               </a>
-              <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+<Link to="/people" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 <ApperIcon name="Users" size={18} />
                 <span>People</span>
-              </a>
+              </Link>
               <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 <ApperIcon name="Archive" size={18} />
                 <span>Archive</span>
@@ -84,10 +84,10 @@ const Layout = () => {
               <ApperIcon name="CheckSquare" size={18} />
               <span>Tasks</span>
             </a>
-            <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+<Link to="/people" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <ApperIcon name="Users" size={18} />
               <span>People</span>
-            </a>
+            </Link>
             <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <ApperIcon name="Archive" size={18} />
               <span>Archive</span>
