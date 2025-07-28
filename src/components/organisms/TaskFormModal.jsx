@@ -18,8 +18,9 @@ const [formData, setFormData] = useState({
     title: "",
     description: "",
     priority: "medium",
-status: "todo",
+    status: "todo",
     assignee: "",
+    people1: "",
     dueDate: ""
   })
 
@@ -27,22 +28,24 @@ status: "todo",
 
   useEffect(() => {
 if (task) {
-setFormData({
+      setFormData({
         title: task.title_c || task.title || "",
         description: task.description_c || task.description || "",
         priority: task.priority_c || task.priority || "medium",
         status: task.status_c || task.status || "todo",
         assignee: task.assignee_c || task.assignee || "",
-dueDate: task.dueDate_c || task.dueDate ? format(new Date(task.dueDate_c || task.dueDate), "yyyy-MM-dd") : ""
+        people1: task.people1_c || task.people1 || "",
+        dueDate: task.dueDate_c || task.dueDate ? format(new Date(task.dueDate_c || task.dueDate), "yyyy-MM-dd") : ""
       })
     } else {
-setFormData({
+      setFormData({
         title: "",
         description: "",
         priority: "medium",
         status: "todo",
         assignee: "",
-dueDate: ""
+        people1: "",
+        dueDate: ""
       })
     }
     setErrors({})
@@ -71,7 +74,8 @@ const submitData = {
       priority: formData.priority,
       status: formData.status,
       assignee: formData.assignee,
-dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
+      people1: formData.people1,
+      dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
     }
     
     onSubmit(submitData)
@@ -163,7 +167,13 @@ dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
               <option value="Emily Chen">Emily Chen</option>
               <option value="Alex Rodriguez">Alex Rodriguez</option>
             </Select>
-<Input
+            <Input
+              label="People1"
+              value={formData.people1}
+              onChange={(e) => handleChange("people1", e.target.value)}
+              placeholder="Enter people1..."
+            />
+            <Input
               label="Due Date"
               type="date"
               value={formData.dueDate}

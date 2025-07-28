@@ -11,13 +11,14 @@ const taskService = {
       })
 
 const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
-{ field: { Name: "priority_c" } },
-{ field: { Name: "status_c" } },
+          { field: { Name: "priority_c" } },
+          { field: { Name: "status_c" } },
           { field: { Name: "assignee_c" } },
+          { field: { Name: "people1_c" } },
           { field: { Name: "dueDate_c" } },
           { field: { Name: "createdAt_c" } },
           { field: { Name: "completedAt_c" } },
@@ -57,12 +58,13 @@ const params = {
       })
 
 const params = {
-        fields: [
+fields: [
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
-{ field: { Name: "priority_c" } },
-{ field: { Name: "status_c" } },
+          { field: { Name: "priority_c" } },
+          { field: { Name: "status_c" } },
           { field: { Name: "assignee_c" } },
+          { field: { Name: "people1_c" } },
           { field: { Name: "dueDate_c" } },
           { field: { Name: "createdAt_c" } },
           { field: { Name: "completedAt_c" } },
@@ -100,12 +102,13 @@ const params = {
 
 const params = {
 records: [{
-          Name: taskData.title,
+Name: taskData.title,
           title_c: taskData.title,
           description_c: taskData.description || "",
           priority_c: taskData.priority || "medium",
-status_c: taskData.status || "todo",
+          status_c: taskData.status || "todo",
           assignee_c: taskData.assignee || "",
+          people1_c: taskData.people1 || "",
           dueDate_c: taskData.dueDate,
           createdAt_c: new Date().toISOString(),
           completedAt_c: null,
@@ -159,12 +162,13 @@ status_c: taskData.status || "todo",
 
 const params = {
         records: [{
-          Id: parseInt(id),
+Id: parseInt(id),
           title_c: updateData.title,
           description_c: updateData.description,
           priority_c: updateData.priority,
-status_c: updateData.status,
+          status_c: updateData.status,
           assignee_c: updateData.assignee,
+          people1_c: updateData.people1,
           dueDate_c: updateData.dueDate,
           completedAt_c: updateData.completedAt,
           archived_c: updateData.archived
