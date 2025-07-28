@@ -5,30 +5,33 @@ import Input from '@/components/atoms/Input'
 import ApperIcon from '@/components/ApperIcon'
 
 const PeopleFormModal = ({ isOpen, onClose, onSubmit, person, loading = false }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    position: ''
+    position: '',
+    test1: ''
   })
   const [errors, setErrors] = useState({})
 
   // Reset form when modal opens/closes or person changes
-  useEffect(() => {
+useEffect(() => {
     if (isOpen) {
       if (person) {
         setFormData({
           name: person.name || '',
           email: person.email || '',
           phone: person.phone || '',
-          position: person.position || ''
+          position: person.position || '',
+          test1: person.test1_c || ''
         })
       } else {
         setFormData({
           name: '',
           email: '',
           phone: '',
-          position: ''
+          position: '',
+          test1: ''
         })
       }
       setErrors({})
@@ -64,7 +67,8 @@ const submitData = {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
-      position: formData.position
+      position: formData.position,
+      test1_c: formData.test1
     }
     
     onSubmit(submitData)
@@ -150,7 +154,7 @@ const submitData = {
                 </div>
 
                 <div>
-                  <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
+<label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
                     Position *
                   </label>
                   <Input
@@ -160,6 +164,22 @@ const submitData = {
                     onChange={(e) => handleChange('position', e.target.value)}
                     placeholder="Enter job position"
                     error={errors.position}
+                    disabled={loading}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="test1" className="block text-sm font-medium text-gray-700 mb-1">
+                    Test1 *
+                  </label>
+                  <Input
+                    id="test1"
+                    type="text"
+                    value={formData.test1}
+                    onChange={(e) => handleChange('test1', e.target.value)}
+                    placeholder="Enter test1 value"
+                    error={errors.test1}
                     disabled={loading}
                     required
                   />
