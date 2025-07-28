@@ -4,9 +4,9 @@ import Error from "@/components/ui/Error";
 
 const peopleService = {
   // Get all people
-  getAll: async () => {
+getAll: async () => {
     try {
-if (!window.ApperSDK) {
+      if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded');
       }
       const { ApperClient } = window.ApperSDK;
@@ -52,8 +52,8 @@ if (!window.ApperSDK) {
         updatedAt: record.ModifiedOn
       })) || [];
 
-      return transformedData;
-} catch (error) {
+return transformedData;
+    } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error fetching people:", error?.response?.data?.message);
       } else {
@@ -64,9 +64,9 @@ if (!window.ApperSDK) {
   },
 
   // Get person by id
-  getById: async (id) => {
+getById: async (id) => {
     try {
-if (!window.ApperSDK) {
+      if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded');
       }
       const { ApperClient } = window.ApperSDK;
@@ -91,8 +91,9 @@ if (!window.ApperSDK) {
         ]
       };
 
-      const response = await apperClient.getRecordById("people_c", parseInt(id), params);
-if (!response.success) {
+const response = await apperClient.getRecordById("people_c", parseInt(id), params);
+      
+      if (!response.success) {
         console.error(response.message);
         toast.error(response.message);
         return null;
@@ -126,9 +127,9 @@ if (!response.success) {
   },
 
   // Create new person
-  create: async (personData) => {
+create: async (personData) => {
     try {
-if (!window.ApperSDK) {
+      if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded');
       }
       const { ApperClient } = window.ApperSDK;
@@ -192,8 +193,8 @@ if (!window.ApperSDK) {
         }
       }
       
-      return null;
-} catch (error) {
+return null;
+    } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error creating person in People service:", error?.response?.data?.message);
       } else {
@@ -204,9 +205,9 @@ if (!window.ApperSDK) {
   },
 
   // Update person
-  update: async (id, updateData) => {
+update: async (id, updateData) => {
     try {
-if (!window.ApperSDK) {
+      if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded');
       }
       const { ApperClient } = window.ApperSDK;
@@ -271,8 +272,8 @@ if (!window.ApperSDK) {
         }
       }
       
-      return null;
-} catch (error) {
+return null;
+    } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error updating person in People service:", error?.response?.data?.message);
       } else {
@@ -282,8 +283,8 @@ if (!window.ApperSDK) {
     }
   },
 
-  // Delete person
-delete: async (id) => {
+// Delete person
+  delete: async (id) => {
     try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded');
@@ -330,8 +331,7 @@ delete: async (id) => {
       }
       return false;
     }
-  }
 }
-};
+}
 
 export default peopleService;

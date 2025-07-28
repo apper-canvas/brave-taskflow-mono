@@ -87,10 +87,9 @@ if (!window.ApperSDK) {
       return null
     }
   },
-
-  // Create new category
+// Create new category
   create: async (categoryData) => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -130,9 +129,9 @@ try {
           })
         }
         
-        return successfulRecords.length > 0 ? successfulRecords[0].data : null
+return successfulRecords.length > 0 ? successfulRecords[0].data : null
       }
-return response.data || null
+      return response.data || null
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error creating category:", error?.response?.data?.message)
@@ -144,9 +143,9 @@ return response.data || null
   },
 
   // Update category
-  update: async (id, updateData) => {
+update: async (id, updateData) => {
     try {
-if (!window.ApperSDK) {
+      if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
       const { ApperClient } = window.ApperSDK
@@ -187,17 +186,9 @@ if (!window.ApperSDK) {
           })
         }
         
-        return successfulUpdates.length > 0 ? successfulUpdates[0].data : null
+return successfulUpdates.length > 0 ? successfulUpdates[0].data : null
       }
-return response.data || null
-    } catch (error) {
-      if (error?.response?.data?.message) {
-        console.error("Error updating category:", error?.response?.data?.message)
-      } else {
-        console.error(error.message)
-      }
-      return null
-    }
+      return response.data || null
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error updating category:", error?.response?.data?.message)
@@ -209,9 +200,9 @@ return response.data || null
   },
 
   // Delete category
-  delete: async (id) => {
+delete: async (id) => {
     try {
-if (!window.ApperSDK) {
+      if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
       const { ApperClient } = window.ApperSDK
@@ -244,9 +235,9 @@ if (!window.ApperSDK) {
           })
         }
         
-        return successfulDeletions.length > 0
+return successfulDeletions.length > 0
       }
-return true
+      return true
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error deleting category:", error?.response?.data?.message)
