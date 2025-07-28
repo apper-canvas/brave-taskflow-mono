@@ -23,9 +23,10 @@ const taskService = {
   create: async (taskData) => {
     await new Promise(resolve => setTimeout(resolve, 400))
     
-    const newTask = {
+const newTask = {
       Id: Math.max(...tasks.map(t => t.Id), 0) + 1,
       ...taskData,
+      assignee: taskData.assignee || "",
       createdAt: new Date().toISOString(),
       completedAt: null,
       archived: false

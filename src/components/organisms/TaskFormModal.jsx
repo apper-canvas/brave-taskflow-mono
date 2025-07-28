@@ -15,12 +15,13 @@ const TaskFormModal = ({
   categories = [],
   loading = false
 }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     title: "",
     description: "",
     priority: "medium",
     status: "todo",
     categoryId: "",
+    assignee: "",
     dueDate: ""
   })
 
@@ -28,12 +29,13 @@ const TaskFormModal = ({
 
   useEffect(() => {
     if (task) {
-      setFormData({
+setFormData({
         title: task.title || "",
         description: task.description || "",
         priority: task.priority || "medium",
         status: task.status || "todo",
         categoryId: task.categoryId || "",
+        assignee: task.assignee || "",
         dueDate: task.dueDate ? format(new Date(task.dueDate), "yyyy-MM-dd") : ""
       })
     } else {
@@ -43,6 +45,7 @@ const TaskFormModal = ({
         priority: "medium",
         status: "todo",
         categoryId: "",
+        assignee: "",
         dueDate: ""
       })
     }
@@ -163,6 +166,19 @@ const TaskFormModal = ({
                   {category.name}
                 </option>
               ))}
+</Select>
+
+            <Select
+              label="Assignee"
+              value={formData.assignee}
+              onChange={(e) => handleChange("assignee", e.target.value)}
+            >
+              <option value="">Select assignee...</option>
+              <option value="John Smith">John Smith</option>
+              <option value="Sarah Johnson">Sarah Johnson</option>
+              <option value="Mike Davis">Mike Davis</option>
+              <option value="Emily Chen">Emily Chen</option>
+              <option value="Alex Rodriguez">Alex Rodriguez</option>
             </Select>
 
             <Input
@@ -171,7 +187,6 @@ const TaskFormModal = ({
               value={formData.dueDate}
               onChange={(e) => handleChange("dueDate", e.target.value)}
             />
-
             <div className="flex gap-3 pt-4">
               <Button
                 type="button"
