@@ -88,9 +88,8 @@ if (!window.ApperSDK) {
 
   // Create new category
   create: async (categoryData) => {
-    try {
-      const { ApperClient } = window.ApperSDK
-if (!window.ApperSDK) {
+try {
+      if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
       const { ApperClient } = window.ApperSDK
