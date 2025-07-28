@@ -1,4 +1,6 @@
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
+import React from "react";
+import Error from "@/components/ui/Error";
 
 const categoryService = {
   // Get all categories
@@ -35,7 +37,7 @@ if (!window.ApperSDK) {
       }
 
       return response.data || []
-    } catch (error) {
+} catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error fetching categories:", error?.response?.data?.message)
       } else {
@@ -76,7 +78,7 @@ if (!window.ApperSDK) {
       }
 
       return response.data
-    } catch (error) {
+} catch (error) {
       if (error?.response?.data?.message) {
         console.error(`Error fetching category with ID ${id}:`, error?.response?.data?.message)
       } else {
@@ -130,6 +132,7 @@ try {
         
         return successfulRecords.length > 0 ? successfulRecords[0].data : null
       }
+return response.data || null
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error creating category:", error?.response?.data?.message)
@@ -186,6 +189,15 @@ if (!window.ApperSDK) {
         
         return successfulUpdates.length > 0 ? successfulUpdates[0].data : null
       }
+return response.data || null
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating category:", error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return null
+    }
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error updating category:", error?.response?.data?.message)
@@ -234,6 +246,7 @@ if (!window.ApperSDK) {
         
         return successfulDeletions.length > 0
       }
+return true
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error deleting category:", error?.response?.data?.message)

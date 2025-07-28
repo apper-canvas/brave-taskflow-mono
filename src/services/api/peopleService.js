@@ -1,4 +1,6 @@
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
+import React from "react";
+import Error from "@/components/ui/Error";
 
 const peopleService = {
   // Get all people
@@ -51,7 +53,7 @@ if (!window.ApperSDK) {
       })) || [];
 
       return transformedData;
-    } catch (error) {
+} catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error fetching people:", error?.response?.data?.message);
       } else {
@@ -90,9 +92,9 @@ if (!window.ApperSDK) {
       };
 
       const response = await apperClient.getRecordById("people_c", parseInt(id), params);
-      
-      if (!response.success) {
+if (!response.success) {
         console.error(response.message);
+        toast.error(response.message);
         return null;
       }
 
@@ -191,7 +193,7 @@ if (!window.ApperSDK) {
       }
       
       return null;
-    } catch (error) {
+} catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error creating person in People service:", error?.response?.data?.message);
       } else {
@@ -270,7 +272,7 @@ if (!window.ApperSDK) {
       }
       
       return null;
-    } catch (error) {
+} catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error updating person in People service:", error?.response?.data?.message);
       } else {
@@ -281,8 +283,8 @@ if (!window.ApperSDK) {
   },
 
   // Delete person
-  delete: async (id) => {
-try {
+delete: async (id) => {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded');
       }
@@ -330,4 +332,6 @@ try {
     }
   }
 }
-export default peopleService
+};
+
+export default peopleService;

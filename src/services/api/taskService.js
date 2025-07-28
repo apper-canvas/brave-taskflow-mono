@@ -1,9 +1,9 @@
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 const taskService = {
   // Get all tasks
   getAll: async () => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -13,8 +13,8 @@ try {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-const params = {
-fields: [
+      const params = {
+        fields: [
           { field: { Name: "Name" } },
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
@@ -53,7 +53,7 @@ fields: [
 
   // Get task by id
   getById: async (id) => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -63,8 +63,9 @@ try {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-const params = {
-fields: [
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
           { field: { Name: "priority_c" } },
@@ -99,7 +100,7 @@ fields: [
 
   // Create new task
   create: async (taskData) => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -109,9 +110,9 @@ try {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-const params = {
-records: [{
-Name: taskData.title,
+      const params = {
+        records: [{
+          Name: taskData.title,
           title_c: taskData.title,
           description_c: taskData.description || "",
           priority_c: taskData.priority || "medium",
@@ -138,7 +139,7 @@ Name: taskData.title,
         const failedRecords = response.results.filter(result => !result.success)
         
         if (failedRecords.length > 0) {
-          console.error(`Failed to create task ${failedRecords.length} records:${JSON.stringify(failedRecords)}`)
+          console.error(`Failed to create ${failedRecords.length} task records: ${JSON.stringify(failedRecords)}`)
           
           failedRecords.forEach(record => {
             record.errors?.forEach(error => {
@@ -150,6 +151,8 @@ Name: taskData.title,
         
         return successfulRecords.length > 0 ? successfulRecords[0].data : null
       }
+
+      return null
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error creating task:", error?.response?.data?.message)
@@ -162,7 +165,7 @@ Name: taskData.title,
 
   // Update task
   update: async (id, updateData) => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -172,18 +175,18 @@ try {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-const params = {
+      const params = {
         records: [{
-Id: parseInt(id),
-          title_c: updateData.title,
-          description_c: updateData.description,
-          priority_c: updateData.priority,
-          status_c: updateData.status,
-          assignee_c: updateData.assignee,
-          people1_c: updateData.people1,
-          dueDate_c: updateData.dueDate,
-          completedAt_c: updateData.completedAt,
-          archived_c: updateData.archived
+          Id: parseInt(id),
+          ...(updateData.title !== undefined && { title_c: updateData.title }),
+          ...(updateData.description !== undefined && { description_c: updateData.description }),
+          ...(updateData.priority !== undefined && { priority_c: updateData.priority }),
+          ...(updateData.status !== undefined && { status_c: updateData.status }),
+          ...(updateData.assignee !== undefined && { assignee_c: updateData.assignee }),
+          ...(updateData.people1 !== undefined && { people1_c: updateData.people1 }),
+          ...(updateData.dueDate !== undefined && { dueDate_c: updateData.dueDate }),
+          ...(updateData.completedAt !== undefined && { completedAt_c: updateData.completedAt }),
+          ...(updateData.archived !== undefined && { archived_c: updateData.archived })
         }]
       }
 
@@ -200,7 +203,7 @@ Id: parseInt(id),
         const failedUpdates = response.results.filter(result => !result.success)
         
         if (failedUpdates.length > 0) {
-          console.error(`Failed to update task ${failedUpdates.length} records:${JSON.stringify(failedUpdates)}`)
+          console.error(`Failed to update ${failedUpdates.length} task records: ${JSON.stringify(failedUpdates)}`)
           
           failedUpdates.forEach(record => {
             record.errors?.forEach(error => {
@@ -212,6 +215,8 @@ Id: parseInt(id),
         
         return successfulUpdates.length > 0 ? successfulUpdates[0].data : null
       }
+
+      return null
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error updating task:", error?.response?.data?.message)
@@ -224,7 +229,7 @@ Id: parseInt(id),
 
   // Delete task
   delete: async (id) => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -251,7 +256,7 @@ try {
         const failedDeletions = response.results.filter(result => !result.success)
         
         if (failedDeletions.length > 0) {
-          console.error(`Failed to delete task ${failedDeletions.length} records:${JSON.stringify(failedDeletions)}`)
+          console.error(`Failed to delete ${failedDeletions.length} task records: ${JSON.stringify(failedDeletions)}`)
           
           failedDeletions.forEach(record => {
             if (record.message) toast.error(record.message)
@@ -260,6 +265,8 @@ try {
         
         return successfulDeletions.length > 0
       }
+
+      return false
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error deleting task:", error?.response?.data?.message)
@@ -272,7 +279,7 @@ try {
 
   // Archive task
   archive: async (id) => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -302,7 +309,7 @@ try {
         const failedUpdates = response.results.filter(result => !result.success)
         
         if (failedUpdates.length > 0) {
-          console.error(`Failed to archive task ${failedUpdates.length} records:${JSON.stringify(failedUpdates)}`)
+          console.error(`Failed to archive ${failedUpdates.length} task records: ${JSON.stringify(failedUpdates)}`)
           
           failedUpdates.forEach(record => {
             record.errors?.forEach(error => {
@@ -314,6 +321,8 @@ try {
         
         return successfulUpdates.length > 0 ? successfulUpdates[0].data : null
       }
+
+      return null
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error archiving task:", error?.response?.data?.message)
@@ -326,7 +335,7 @@ try {
 
   // Get archived tasks
   getArchived: async () => {
-try {
+    try {
       if (!window.ApperSDK) {
         throw new Error('ApperSDK not loaded')
       }
@@ -337,12 +346,14 @@ try {
       })
 
       const params = {
-fields: [
+        fields: [
+          { field: { Name: "Name" } },
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
-{ field: { Name: "priority_c" } },
-{ field: { Name: "status_c" } },
+          { field: { Name: "priority_c" } },
+          { field: { Name: "status_c" } },
           { field: { Name: "assignee_c" } },
+          { field: { Name: "people1_c" } },
           { field: { Name: "dueDate_c" } },
           { field: { Name: "createdAt_c" } },
           { field: { Name: "completedAt_c" } },
@@ -379,4 +390,5 @@ fields: [
     }
   }
 }
+
 export default taskService
