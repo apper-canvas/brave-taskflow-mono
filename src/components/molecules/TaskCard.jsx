@@ -50,11 +50,11 @@ const TaskCard = ({
     return { text: `Due ${format(dueDate, "MMM d")}`, color: "text-gray-600" }
   }
 
-  const dueDateInfo = formatDueDate(task.dueDate)
+const dueDateInfo = formatDueDate(task.dueDate_c)
 
   const handleStatusCycle = () => {
     const statusOrder = ["todo", "in-progress", "completed"]
-    const currentIndex = statusOrder.indexOf(task.status)
+    const currentIndex = statusOrder.indexOf(task.status_c)
     const nextStatus = statusOrder[(currentIndex + 1) % statusOrder.length]
     onStatusChange(task.Id, nextStatus)
   }
@@ -77,16 +77,16 @@ const TaskCard = ({
             <div className={cn("priority-dot", `priority-${task.priority}`)} />
             
             <div className="flex-1">
-              <h3 className={cn(
+<h3 className={cn(
                 "font-semibold text-gray-900 task-title",
-                task.status === "completed" && "line-through text-gray-500"
+                task.status_c === "completed" && "line-through text-gray-500"
               )}>
-                {task.title}
+                {task.title_c}
               </h3>
               
-              {task.description && (
+{task.description_c && (
                 <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-                  {task.description}
+                  {task.description_c}
                 </p>
               )}
             </div>

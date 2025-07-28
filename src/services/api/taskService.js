@@ -12,6 +12,7 @@ const taskService = {
 
 const params = {
         fields: [
+          { field: { Name: "Name" } },
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
           { field: { Name: "priority_c" } },
