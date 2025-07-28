@@ -24,7 +24,7 @@ const TasksPage = () => {
     loadData()
   }, [])
 
-  const loadData = async () => {
+const loadData = async () => {
     try {
       setLoading(true)
       setError("")
@@ -34,11 +34,23 @@ const TasksPage = () => {
         categoryService.getAll()
       ])
       
-      setTasks(tasksData)
-      setCategories(categoriesData)
+      // Handle empty or non-existent data
+      if (!tasksData || tasksData.length === 0) {
+        setTasks([])
+      } else {
+        setTasks(tasksData)
+      }
+      
+      if (!categoriesData || categoriesData.length === 0) {
+        setCategories([])
+      } else {
+        setCategories(categoriesData)
+      }
     } catch (err) {
       setError("Failed to load tasks and categories")
       console.error("Load data error:", err)
+      setTasks([])
+      setCategories([])
     } finally {
       setLoading(false)
     }
@@ -47,9 +59,9 @@ const TasksPage = () => {
   // Calculate task counts per category
   const getTaskCounts = () => {
     const counts = {}
-    categories.forEach(category => {
+categories.forEach(category => {
       counts[category.Id] = tasks.filter(task => 
-        task.categoryId === category.Id && !task.archived
+        task.categoryId_c === category.Id && !task.archived_c
       ).length
     })
     return counts
@@ -107,11 +119,11 @@ const TasksPage = () => {
 
   // Handle status change
   const handleStatusChange = async (taskId, newStatus) => {
-    try {
+try {
       const task = tasks.find(t => t.Id === taskId)
       const updateData = { 
-        status: newStatus,
-        completedAt: newStatus === "completed" ? new Date().toISOString() : null
+        status_c: newStatus,
+        completedAt_c: newStatus === "completed" ? new Date().toISOString() : null
       }
       
       const updatedTask = await taskService.update(taskId, updateData)

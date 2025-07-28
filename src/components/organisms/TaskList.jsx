@@ -25,32 +25,34 @@ const TaskList = ({
 
   // Filter and search tasks
   const filteredTasks = tasks.filter(task => {
-    const matchesSearch = !searchTerm || 
-      task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      task.description.toLowerCase().includes(searchTerm.toLowerCase())
+const matchesSearch = !searchTerm || 
+      (task.title_c || task.title || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (task.description_c || task.description || "").toLowerCase().includes(searchTerm.toLowerCase())
     
-    const matchesStatus = !statusFilter || task.status === statusFilter
-    const matchesPriority = !priorityFilter || task.priority === priorityFilter
-    const matchesCategory = !selectedCategory || task.categoryId === selectedCategory
+const matchesStatus = !statusFilter || (task.status_c || task.status) === statusFilter
+    const matchesPriority = !priorityFilter || (task.priority_c || task.priority) === priorityFilter
+    const matchesCategory = !selectedCategory || (task.categoryId_c || task.categoryId) === selectedCategory
     
-    return matchesSearch && matchesStatus && matchesPriority && matchesCategory && !task.archived
+return matchesSearch && matchesStatus && matchesPriority && matchesCategory && !(task.archived_c || task.archived)
   })
 
   // Sort tasks
   const sortedTasks = [...filteredTasks].sort((a, b) => {
     switch (sortBy) {
       case "priority": {
-        const priorityOrder = { high: 3, medium: 2, low: 1 }
-        return priorityOrder[b.priority] - priorityOrder[a.priority]
+const priorityOrder = { high: 3, medium: 2, low: 1 }
+        return priorityOrder[b.priority_c || b.priority] - priorityOrder[a.priority_c || a.priority]
       }
       case "dueDate": {
-        if (!a.dueDate && !b.dueDate) return 0
-        if (!a.dueDate) return 1
-        if (!b.dueDate) return -1
-        return new Date(a.dueDate) - new Date(b.dueDate)
+const aDate = a.dueDate_c || a.dueDate
+        const bDate = b.dueDate_c || b.dueDate
+        if (!aDate && !bDate) return 0
+        if (!aDate) return 1
+        if (!bDate) return -1
+        return new Date(aDate) - new Date(bDate)
       }
       case "created":
-        return new Date(b.createdAt) - new Date(a.createdAt)
+return new Date(b.createdAt_c || b.createdAt) - new Date(a.createdAt_c || a.createdAt)
       default:
         return 0
     }
@@ -150,7 +152,7 @@ const TaskList = ({
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <ApperIcon name="Filter" size={16} />
           <span>
-            Showing {sortedTasks.length} of {tasks.filter(t => !t.archived).length} tasks
+Showing {sortedTasks.length} of {tasks.filter(t => !(t.archived_c || t.archived)).length} tasks
           </span>
         </div>
       )}

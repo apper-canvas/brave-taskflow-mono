@@ -1,8 +1,9 @@
-import { Outlet } from "react-router-dom"
-import { useState } from "react"
-import ApperIcon from "@/components/ApperIcon"
-import Button from "@/components/atoms/Button"
-import { cn } from "@/utils/cn"
+import { Outlet } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import { cn } from "@/utils/cn";
+import { AuthContext } from "@/App";
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -111,12 +112,25 @@ const Layout = () => {
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
+<div className="flex items-center gap-3">
               <Button variant="ghost" size="sm" className="p-2">
                 <ApperIcon name="Bell" size={18} />
               </Button>
               <Button variant="ghost" size="sm" className="p-2">
                 <ApperIcon name="Search" size={18} />
+              </Button>
+<Button 
+                variant="ghost" 
+                size="sm" 
+                className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50"
+                onClick={() => {
+                  const authContext = useContext(AuthContext);
+                  if (authContext?.logout) {
+                    authContext.logout();
+                  }
+                }}
+              >
+                <ApperIcon name="LogOut" size={18} />
               </Button>
             </div>
           </div>

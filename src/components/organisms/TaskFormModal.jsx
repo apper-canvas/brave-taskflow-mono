@@ -28,15 +28,15 @@ const [formData, setFormData] = useState({
   const [errors, setErrors] = useState({})
 
   useEffect(() => {
-    if (task) {
-setFormData({
-        title: task.title || "",
-        description: task.description || "",
-        priority: task.priority || "medium",
-        status: task.status || "todo",
-        categoryId: task.categoryId || "",
-        assignee: task.assignee || "",
-        dueDate: task.dueDate ? format(new Date(task.dueDate), "yyyy-MM-dd") : ""
+if (task) {
+      setFormData({
+        title: task.title_c || task.title || "",
+        description: task.description_c || task.description || "",
+        priority: task.priority_c || task.priority || "medium",
+        status: task.status_c || task.status || "todo",
+        categoryId: task.categoryId_c || task.categoryId || "",
+        assignee: task.assignee_c || task.assignee || "",
+        dueDate: task.dueDate_c || task.dueDate ? format(new Date(task.dueDate_c || task.dueDate), "yyyy-MM-dd") : ""
       })
     } else {
       setFormData({
@@ -72,8 +72,13 @@ setFormData({
     
     if (!validateForm()) return
     
-    const submitData = {
-      ...formData,
+const submitData = {
+      title: formData.title,
+      description: formData.description,
+      priority: formData.priority,
+      status: formData.status,
+      categoryId: formData.categoryId,
+      assignee: formData.assignee,
       dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
     }
     
@@ -161,9 +166,9 @@ setFormData({
               error={errors.categoryId}
             >
               <option value="">Select category...</option>
-              {categories.map(category => (
+{categories.map(category => (
                 <option key={category.Id} value={category.Id}>
-                  {category.name}
+                  {category.Name || category.name}
                 </option>
               ))}
 </Select>

@@ -1,38 +1,38 @@
 [
   {
-    "Id": "1",
-    "name": "Business",
-    "color": "#5B21B6",
-    "taskCount": 0
+    "Id": 1,
+    "Name": "Business",
+    "color_c": "#5B21B6",
+    "taskCount_c": 0
   },
   {
-    "Id": "2",
-    "name": "Personal",
-    "color": "#059669",
-    "taskCount": 0
+    "Id": 2,
+    "Name": "Personal", 
+    "color_c": "#059669",
+    "taskCount_c": 0
   },
   {
-    "Id": "3",
-    "name": "Development",
-    "color": "#DC2626",
-    "taskCount": 0
+    "Id": 3,
+    "Name": "Development",
+    "color_c": "#DC2626",
+    "taskCount_c": 0
   },
   {
-    "Id": "4",
-    "name": "Finance",
-    "color": "#F59E0B",
-    "taskCount": 0
+    "Id": 4,
+    "Name": "Finance",
+    "color_c": "#F59E0B",
+    "taskCount_c": 0
   },
   {
-    "Id": "5",
-    "name": "Marketing",
-    "color": "#8B5CF6",
-    "taskCount": 0
+    "Id": 5,
+    "Name": "Marketing",
+    "color_c": "#8B5CF6",
+    "taskCount_c": 0
   },
   {
-    "Id": "6",
-    "name": "Research",
-    "color": "#0EA5E9",
-    "taskCount": 0
+    "Id": 6,
+    "Name": "Research",
+    "color_c": "#0EA5E9",
+    "taskCount_c": 0
   }
 ]
