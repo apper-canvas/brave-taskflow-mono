@@ -98,8 +98,9 @@ const params = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-      const params = {
+const params = {
 records: [{
+          Name: taskData.title,
           title_c: taskData.title,
           description_c: taskData.description || "",
           priority_c: taskData.priority || "medium",
