@@ -20,6 +20,7 @@ const [formData, setFormData] = useState({
     priority: "medium",
     status: "todo",
     assignee: "",
+    assignee1: "",
     dueDate: ""
   })
 
@@ -27,21 +28,23 @@ const [formData, setFormData] = useState({
 
   useEffect(() => {
 if (task) {
-      setFormData({
+setFormData({
         title: task.title_c || task.title || "",
         description: task.description_c || task.description || "",
         priority: task.priority_c || task.priority || "medium",
         status: task.status_c || task.status || "todo",
         assignee: task.assignee_c || task.assignee || "",
+        assignee1: task.assignee1_c || task.assignee1 || "",
         dueDate: task.dueDate_c || task.dueDate ? format(new Date(task.dueDate_c || task.dueDate), "yyyy-MM-dd") : ""
       })
     } else {
-      setFormData({
+setFormData({
         title: "",
         description: "",
         priority: "medium",
         status: "todo",
         assignee: "",
+        assignee1: "",
         dueDate: ""
       })
     }
@@ -71,6 +74,7 @@ const submitData = {
       priority: formData.priority,
       status: formData.status,
       assignee: formData.assignee,
+      assignee1: formData.assignee1,
       dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
     }
     
@@ -151,7 +155,7 @@ const submitData = {
               </Select>
             </div>
 
-            <Select
+<Select
               label="Assignee"
               value={formData.assignee}
               onChange={(e) => handleChange("assignee", e.target.value)}
@@ -164,6 +168,18 @@ const submitData = {
               <option value="Alex Rodriguez">Alex Rodriguez</option>
             </Select>
 
+            <Select
+              label="Assignee1"
+              value={formData.assignee1}
+              onChange={(e) => handleChange("assignee1", e.target.value)}
+            >
+              <option value="">Select assignee1...</option>
+              <option value="John Smith">John Smith</option>
+              <option value="Sarah Johnson">Sarah Johnson</option>
+              <option value="Mike Davis">Mike Davis</option>
+              <option value="Emily Chen">Emily Chen</option>
+              <option value="Alex Rodriguez">Alex Rodriguez</option>
+            </Select>
             <Input
               label="Due Date"
               type="date"
