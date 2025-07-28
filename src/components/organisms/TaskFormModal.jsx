@@ -87,7 +87,7 @@ const [formData, setFormData] = useState({
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault()
     
     if (!validateForm()) return
@@ -98,7 +98,7 @@ const submitData = {
       priority: formData.priority,
       status: formData.status,
       assignee: formData.assignee,
-      people1: formData.people1,
+      people1: formData.people1 ? parseInt(formData.people1) : null,
       dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
     }
     
