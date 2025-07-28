@@ -18,9 +18,8 @@ const [formData, setFormData] = useState({
     title: "",
     description: "",
     priority: "medium",
-    status: "todo",
+status: "todo",
     assignee: "",
-    assignee1: "",
     dueDate: ""
   })
 
@@ -34,8 +33,7 @@ setFormData({
         priority: task.priority_c || task.priority || "medium",
         status: task.status_c || task.status || "todo",
         assignee: task.assignee_c || task.assignee || "",
-        assignee1: task.assignee1_c || task.assignee1 || "",
-        dueDate: task.dueDate_c || task.dueDate ? format(new Date(task.dueDate_c || task.dueDate), "yyyy-MM-dd") : ""
+dueDate: task.dueDate_c || task.dueDate ? format(new Date(task.dueDate_c || task.dueDate), "yyyy-MM-dd") : ""
       })
     } else {
 setFormData({
@@ -44,8 +42,7 @@ setFormData({
         priority: "medium",
         status: "todo",
         assignee: "",
-        assignee1: "",
-        dueDate: ""
+dueDate: ""
       })
     }
     setErrors({})
@@ -74,8 +71,7 @@ const submitData = {
       priority: formData.priority,
       status: formData.status,
       assignee: formData.assignee,
-      assignee1: formData.assignee1,
-      dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
+dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
     }
     
     onSubmit(submitData)
@@ -167,20 +163,7 @@ const submitData = {
               <option value="Emily Chen">Emily Chen</option>
               <option value="Alex Rodriguez">Alex Rodriguez</option>
             </Select>
-
-            <Select
-              label="Assignee1"
-              value={formData.assignee1}
-              onChange={(e) => handleChange("assignee1", e.target.value)}
-            >
-              <option value="">Select assignee1...</option>
-              <option value="John Smith">John Smith</option>
-              <option value="Sarah Johnson">Sarah Johnson</option>
-              <option value="Mike Davis">Mike Davis</option>
-              <option value="Emily Chen">Emily Chen</option>
-              <option value="Alex Rodriguez">Alex Rodriguez</option>
-            </Select>
-            <Input
+<Input
               label="Due Date"
               type="date"
               value={formData.dueDate}
