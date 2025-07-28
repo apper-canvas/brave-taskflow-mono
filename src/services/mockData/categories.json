@@ -1,0 +1,38 @@
+[
+  {
+    "Id": "1",
+    "name": "Business",
+    "color": "#5B21B6",
+    "taskCount": 0
+  },
+  {
+    "Id": "2",
+    "name": "Personal",
+    "color": "#059669",
+    "taskCount": 0
+  },
+  {
+    "Id": "3",
+    "name": "Development",
+    "color": "#DC2626",
+    "taskCount": 0
+  },
+  {
+    "Id": "4",
+    "name": "Finance",
+    "color": "#F59E0B",
+    "taskCount": 0
+  },
+  {
+    "Id": "5",
+    "name": "Marketing",
+    "color": "#8B5CF6",
+    "taskCount": 0
+  },
+  {
+    "Id": "6",
+    "name": "Research",
+    "color": "#0EA5E9",
+    "taskCount": 0
+  }
+]
