@@ -3,7 +3,10 @@ import { toast } from "react-toastify"
 const taskService = {
   // Get all tasks
   getAll: async () => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -50,7 +53,10 @@ fields: [
 
   // Get task by id
   getById: async (id) => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -93,7 +99,10 @@ fields: [
 
   // Create new task
   create: async (taskData) => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -153,7 +162,10 @@ Name: taskData.title,
 
   // Update task
   update: async (id, updateData) => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -212,7 +224,10 @@ Id: parseInt(id),
 
   // Delete task
   delete: async (id) => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -257,7 +272,10 @@ Id: parseInt(id),
 
   // Archive task
   archive: async (id) => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -308,7 +326,10 @@ Id: parseInt(id),
 
   // Get archived tasks
   getArchived: async () => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,

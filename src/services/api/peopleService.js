@@ -4,6 +4,9 @@ const peopleService = {
   // Get all people
   getAll: async () => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded');
+      }
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -61,6 +64,9 @@ const peopleService = {
   // Get person by id
   getById: async (id) => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded');
+      }
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -120,6 +126,9 @@ const peopleService = {
   // Create new person
   create: async (personData) => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded');
+      }
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -195,6 +204,9 @@ const peopleService = {
   // Update person
   update: async (id, updateData) => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded');
+      }
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -270,7 +282,10 @@ const peopleService = {
 
   // Delete person
   delete: async (id) => {
-    try {
+try {
+      if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded');
+      }
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,

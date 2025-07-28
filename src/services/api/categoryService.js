@@ -4,6 +4,9 @@ const categoryService = {
   // Get all categories
   getAll: async () => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -45,6 +48,9 @@ const categoryService = {
   // Get category by id
   getById: async (id) => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -84,11 +90,14 @@ const categoryService = {
   create: async (categoryData) => {
     try {
       const { ApperClient } = window.ApperSDK
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
+      const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
-
       const params = {
         records: [{
           Name: categoryData.Name || categoryData.name,
@@ -135,6 +144,9 @@ const categoryService = {
   // Update category
   update: async (id, updateData) => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
@@ -188,6 +200,9 @@ const categoryService = {
   // Delete category
   delete: async (id) => {
     try {
+if (!window.ApperSDK) {
+        throw new Error('ApperSDK not loaded')
+      }
       const { ApperClient } = window.ApperSDK
       const apperClient = new ApperClient({
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
