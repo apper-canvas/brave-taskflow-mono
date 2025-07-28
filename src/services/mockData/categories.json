@@ -31,8 +31,26 @@
   },
   {
     "Id": 6,
-    "Name": "Research",
+"Name": "Research",
     "color_c": "#0EA5E9",
+    "taskCount_c": 0
+  },
+  {
+    "Id": 7,
+    "Name": "Option A",
+    "color_c": "#0D9488",
+    "taskCount_c": 0
+  },
+  {
+    "Id": 8,
+    "Name": "Option B", 
+    "color_c": "#4F46E5",
+    "taskCount_c": 0
+  },
+  {
+    "Id": 9,
+    "Name": "Option C",
+    "color_c": "#EC4899",
     "taskCount_c": 0
   }
 ]
