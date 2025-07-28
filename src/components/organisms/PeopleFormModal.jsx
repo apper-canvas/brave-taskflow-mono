@@ -60,7 +60,7 @@ const PeopleFormModal = ({ isOpen, onClose, onSubmit, person, loading = false })
     e.preventDefault()
     if (!validateForm()) return
     
-    const submitData = {
+const submitData = {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
