@@ -159,19 +159,21 @@ const submitData = {
               </Select>
             </div>
 
-            <Select
+<Select
               label="Category"
               value={formData.categoryId}
               onChange={(e) => handleChange("categoryId", e.target.value)}
               error={errors.categoryId}
             >
               <option value="">Select category...</option>
-{categories.map(category => (
+              {categories && categories.length > 0 ? categories.map(category => (
                 <option key={category.Id} value={category.Id}>
                   {category.Name || category.name}
                 </option>
-              ))}
-</Select>
+              )) : (
+                <option disabled>No categories available</option>
+              )}
+            </Select>
 
             <Select
               label="Assignee"

@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import CategorySidebar from "@/components/organisms/CategorySidebar"
 import TaskList from "@/components/organisms/TaskList"
 import TaskFormModal from "@/components/organisms/TaskFormModal"
+import CategoryFormModal from "@/components/organisms/CategoryFormModal"
 import Loading from "@/components/ui/Loading"
 import Error from "@/components/ui/Error"
 import taskService from "@/services/api/taskService"
@@ -18,7 +19,9 @@ const TasksPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingTask, setEditingTask] = useState(null)
   const [modalLoading, setModalLoading] = useState(false)
-
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
+  const [editingCategory, setEditingCategory] = useState(null)
+  const [categoryModalLoading, setCategoryModalLoading] = useState(false)
   // Load initial data
   useEffect(() => {
     loadData()
@@ -101,6 +104,25 @@ categories.forEach(category => {
     } finally {
       setModalLoading(false)
     }
+}
+
+  // Handle category creation
+  const handleCreateCategory = async (categoryData) => {
+    try {
+      setCategoryModalLoading(true)
+      const newCategory = await categoryService.create(categoryData)
+      if (newCategory) {
+        setCategories(prev => [...prev, newCategory])
+        setIsCategoryModalOpen(false)
+        setEditingCategory(null)
+        toast.success("Category created successfully!")
+      }
+    } catch (err) {
+      toast.error("Failed to create category")
+      console.error("Create category error:", err)
+    } finally {
+      setCategoryModalLoading(false)
+    }
   }
 
   // Handle task deletion
@@ -165,11 +187,31 @@ try {
   const closeModal = () => {
     setIsModalOpen(false)
     setEditingTask(null)
+}
+
+  // Handle category form submission
+  const handleCategoryFormSubmit = (categoryData) => {
+    if (editingCategory) {
+      // Handle edit in future if needed
+    } else {
+      handleCreateCategory(categoryData)
+    }
+  }
+
+  // Open create category modal
+  const openCreateCategoryModal = () => {
+    setEditingCategory(null)
+    setIsCategoryModalOpen(true)
+  }
+
+  // Close category modal
+  const closeCategoryModal = () => {
+    setIsCategoryModalOpen(false)
+    setEditingCategory(null)
   }
 
   if (loading) return <Loading />
   if (error) return <Error message={error} onRetry={loadData} />
-
   return (
     <div className="flex h-[calc(100vh-8rem)] gap-6">
       {/* Category Sidebar */}
@@ -178,12 +220,13 @@ try {
         animate={{ x: 0, opacity: 1 }}
         className="w-64 flex-shrink-0"
       >
-        <CategorySidebar
+<CategorySidebar
           categories={categories}
           selectedCategory={selectedCategory}
           onCategorySelect={setSelectedCategory}
           taskCounts={getTaskCounts()}
           className="h-full rounded-lg shadow-sm"
+          onAddCategory={openCreateCategoryModal}
         />
       </motion.div>
 
@@ -207,7 +250,7 @@ try {
         />
       </motion.div>
 
-      {/* Task Form Modal */}
+{/* Task Form Modal */}
       <TaskFormModal
         isOpen={isModalOpen}
         onClose={closeModal}
@@ -215,6 +258,15 @@ try {
         task={editingTask}
         categories={categories}
         loading={modalLoading}
+      />
+
+      {/* Category Form Modal */}
+      <CategoryFormModal
+        isOpen={isCategoryModalOpen}
+        onClose={closeCategoryModal}
+        onSubmit={handleCategoryFormSubmit}
+        category={editingCategory}
+        loading={categoryModalLoading}
       />
     </div>
   )

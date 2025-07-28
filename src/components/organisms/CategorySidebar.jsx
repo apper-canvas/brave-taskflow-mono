@@ -7,7 +7,8 @@ const CategorySidebar = ({
   selectedCategory, 
   onCategorySelect,
   taskCounts = {},
-  className 
+  className,
+  onAddCategory
 }) => {
   const allTasksCount = Object.values(taskCounts).reduce((sum, count) => sum + count, 0)
 
@@ -73,9 +74,20 @@ const CategorySidebar = ({
               )}>
                 {taskCounts[category.Id] || 0}
               </span>
-            </motion.button>
+</motion.button>
           ))}
         </div>
+        
+        {/* Add Category Button */}
+        <motion.button
+          onClick={onAddCategory}
+          className="w-full mt-4 p-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 flex items-center justify-center gap-2 text-gray-600 hover:text-primary-600"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <ApperIcon name="Plus" size={16} />
+          <span className="text-sm font-medium">Add Category</span>
+        </motion.button>
       </div>
     </div>
   )
