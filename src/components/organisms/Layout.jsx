@@ -7,7 +7,7 @@ import { AuthContext } from "@/App";
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
+  const authContext = useContext(AuthContext)
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Mobile Sidebar Overlay */}
@@ -124,7 +124,6 @@ const Layout = () => {
                 size="sm" 
                 className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50"
                 onClick={() => {
-                  const authContext = useContext(AuthContext);
                   if (authContext?.logout) {
                     authContext.logout();
                   }
