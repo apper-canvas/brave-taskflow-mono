@@ -315,7 +315,4 @@ const peopleService = {
     }
   }
 }
-
-export default peopleService
-
 export default peopleService
