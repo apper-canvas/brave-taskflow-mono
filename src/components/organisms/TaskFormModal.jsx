@@ -12,7 +12,6 @@ const TaskFormModal = ({
   onClose, 
   onSubmit, 
   task = null,
-  categories = [],
   loading = false
 }) => {
 const [formData, setFormData] = useState({
@@ -20,7 +19,6 @@ const [formData, setFormData] = useState({
     description: "",
     priority: "medium",
     status: "todo",
-    categoryId: "",
     assignee: "",
     dueDate: ""
   })
@@ -34,7 +32,6 @@ if (task) {
         description: task.description_c || task.description || "",
         priority: task.priority_c || task.priority || "medium",
         status: task.status_c || task.status || "todo",
-        categoryId: task.categoryId_c || task.categoryId || "",
         assignee: task.assignee_c || task.assignee || "",
         dueDate: task.dueDate_c || task.dueDate ? format(new Date(task.dueDate_c || task.dueDate), "yyyy-MM-dd") : ""
       })
@@ -44,7 +41,6 @@ if (task) {
         description: "",
         priority: "medium",
         status: "todo",
-        categoryId: "",
         assignee: "",
         dueDate: ""
       })
@@ -59,9 +55,6 @@ if (task) {
       newErrors.title = "Title is required"
     }
     
-    if (!formData.categoryId) {
-      newErrors.categoryId = "Category is required"
-    }
     
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -77,7 +70,6 @@ const submitData = {
       description: formData.description,
       priority: formData.priority,
       status: formData.status,
-      categoryId: formData.categoryId,
       assignee: formData.assignee,
       dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null
     }
@@ -158,22 +150,6 @@ const submitData = {
                 <option value="completed">Completed</option>
               </Select>
             </div>
-
-<Select
-              label="Category"
-              value={formData.categoryId}
-              onChange={(e) => handleChange("categoryId", e.target.value)}
-              error={errors.categoryId}
-            >
-              <option value="">Select category...</option>
-              {categories && categories.length > 0 ? categories.map(category => (
-                <option key={category.Id} value={category.Id}>
-                  {category.Name || category.name}
-                </option>
-              )) : (
-                <option disabled>No categories available</option>
-              )}
-            </Select>
 
             <Select
               label="Assignee"

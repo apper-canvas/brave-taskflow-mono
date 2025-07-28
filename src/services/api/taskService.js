@@ -10,13 +10,12 @@ const taskService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-      const params = {
+const params = {
         fields: [
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
           { field: { Name: "priority_c" } },
           { field: { Name: "status_c" } },
-          { field: { Name: "categoryId_c" } },
           { field: { Name: "assignee_c" } },
           { field: { Name: "dueDate_c" } },
           { field: { Name: "createdAt_c" } },
@@ -56,13 +55,12 @@ const taskService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-      const params = {
+const params = {
         fields: [
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
           { field: { Name: "priority_c" } },
           { field: { Name: "status_c" } },
-          { field: { Name: "categoryId_c" } },
           { field: { Name: "assignee_c" } },
           { field: { Name: "dueDate_c" } },
           { field: { Name: "createdAt_c" } },
@@ -100,12 +98,11 @@ const taskService = {
       })
 
       const params = {
-        records: [{
+records: [{
           title_c: taskData.title,
           description_c: taskData.description || "",
           priority_c: taskData.priority || "medium",
           status_c: taskData.status || "todo",
-          categoryId_c: parseInt(taskData.categoryId),
           assignee_c: taskData.assignee || "",
           dueDate_c: taskData.dueDate,
           createdAt_c: new Date().toISOString(),
@@ -158,14 +155,13 @@ const taskService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       })
 
-      const params = {
+const params = {
         records: [{
           Id: parseInt(id),
           title_c: updateData.title,
           description_c: updateData.description,
           priority_c: updateData.priority,
           status_c: updateData.status,
-          categoryId_c: updateData.categoryId ? parseInt(updateData.categoryId) : undefined,
           assignee_c: updateData.assignee,
           dueDate_c: updateData.dueDate,
           completedAt_c: updateData.completedAt,
@@ -314,12 +310,11 @@ const taskService = {
       })
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "title_c" } },
           { field: { Name: "description_c" } },
           { field: { Name: "priority_c" } },
           { field: { Name: "status_c" } },
-          { field: { Name: "categoryId_c" } },
           { field: { Name: "assignee_c" } },
           { field: { Name: "dueDate_c" } },
           { field: { Name: "createdAt_c" } },

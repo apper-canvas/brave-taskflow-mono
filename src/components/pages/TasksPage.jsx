@@ -60,12 +60,10 @@ const loadData = async () => {
   }
 
   // Calculate task counts per category
-  const getTaskCounts = () => {
+const getTaskCounts = () => {
     const counts = {}
-categories.forEach(category => {
-      counts[category.Id] = tasks.filter(task => 
-        task.categoryId_c === category.Id && !task.archived_c
-      ).length
+    categories.forEach(category => {
+      counts[category.Id] = 0  // Category counts no longer based on tasks
     })
     return counts
   }
@@ -251,12 +249,11 @@ try {
       </motion.div>
 
 {/* Task Form Modal */}
-      <TaskFormModal
+<TaskFormModal
         isOpen={isModalOpen}
         onClose={closeModal}
         onSubmit={handleFormSubmit}
         task={editingTask}
-        categories={categories}
         loading={modalLoading}
       />
 
