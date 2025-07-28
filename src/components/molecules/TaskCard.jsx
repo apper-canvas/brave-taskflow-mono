@@ -93,15 +93,15 @@ const TaskCard = ({
           </div>
           
           <div className="flex items-center gap-4 text-sm">
-            <button
+<button
               onClick={handleStatusCycle}
               className={cn(
                 "flex items-center gap-1 hover:opacity-75 transition-opacity",
-                getStatusColor(task.status)
+                getStatusColor(task.status_c)
               )}
             >
-              <ApperIcon name={getStatusIcon(task.status)} size={14} />
-              <span className="capitalize">{task.status.replace("-", " ")}</span>
+              <ApperIcon name={getStatusIcon(task.status_c)} size={14} />
+              <span className="capitalize">{task.status_c?.replace("-", " ") || "Unknown"}</span>
             </button>
             
             {category && (
