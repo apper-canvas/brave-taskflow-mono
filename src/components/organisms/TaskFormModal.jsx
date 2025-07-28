@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { format } from "date-fns"
-import Button from "@/components/atoms/Button"
-import Input from "@/components/atoms/Input"
-import Textarea from "@/components/atoms/Textarea"
-import Select from "@/components/atoms/Select"
-import ApperIcon from "@/components/ApperIcon"
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { format } from "date-fns";
+import peopleService from "@/services/api/peopleService";
+import ApperIcon from "@/components/ApperIcon";
+import Textarea from "@/components/atoms/Textarea";
+import Input from "@/components/atoms/Input";
+import Button from "@/components/atoms/Button";
+import Select from "@/components/atoms/Select";
 
 const TaskFormModal = ({ 
   isOpen, 
@@ -22,12 +23,15 @@ const [formData, setFormData] = useState({
     assignee: "",
     people1: "",
     dueDate: ""
-  })
-
+})
   const [errors, setErrors] = useState({})
-
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [people, setPeople] = useState([])
+  const [peopleLoading, setPeopleLoading] = useState(false)
+  const [peopleError, setPeopleError] = useState(null)
+// Handle initial data population
   useEffect(() => {
-if (task) {
+    if (task) {
       setFormData({
         title: task.title_c || task.title || "",
         description: task.description_c || task.description || "",
@@ -48,9 +52,29 @@ if (task) {
         dueDate: ""
       })
     }
-    setErrors({})
   }, [task, isOpen])
+  // Fetch people data for dropdown
+  useEffect(() => {
+    const fetchPeople = async () => {
+      setPeopleLoading(true)
+      setPeopleError(null)
+      try {
+        const peopleData = await peopleService.getAll()
+        setPeople(peopleData || [])
+      } catch (error) {
+        setPeopleError('Failed to load people')
+        console.error('Error loading people:', error)
+      } finally {
+        setPeopleLoading(false)
+      }
+    }
 
+    if (isOpen) {
+      fetchPeople()
+    }
+  }, [isOpen])
+
+  // Form validation
   const validateForm = () => {
     const newErrors = {}
     
@@ -167,12 +191,22 @@ const submitData = {
               <option value="Emily Chen">Emily Chen</option>
               <option value="Alex Rodriguez">Alex Rodriguez</option>
             </Select>
-            <Input
+<Select
               label="People1"
               value={formData.people1}
               onChange={(e) => handleChange("people1", e.target.value)}
-              placeholder="Enter people1..."
-            />
+              disabled={peopleLoading}
+              error={peopleError}
+            >
+              <option value="">
+                {peopleLoading ? 'Loading people...' : 'Select a person...'}
+              </option>
+              {people.map((person) => (
+                <option key={person.Id} value={person.Id}>
+                  {person.name}
+                </option>
+              ))}
+            </Select>
             <Input
               label="Due Date"
               type="date"
