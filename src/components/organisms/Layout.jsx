@@ -37,7 +37,7 @@ const Layout = () => {
               </Button>
             </div>
           </div>
-          <nav className="p-6">
+<nav className="p-6">
             <div className="space-y-2">
               <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 <ApperIcon name="Home" size={18} />
@@ -46,6 +46,10 @@ const Layout = () => {
               <a href="#" className="flex items-center gap-3 px-3 py-2 bg-primary-50 text-primary-700 rounded-lg">
                 <ApperIcon name="CheckSquare" size={18} />
                 <span>Tasks</span>
+              </a>
+              <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                <ApperIcon name="Users" size={18} />
+                <span>People</span>
               </a>
               <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 <ApperIcon name="Archive" size={18} />
@@ -70,7 +74,7 @@ const Layout = () => {
             <h1 className="text-xl font-bold text-gray-900">TaskFlow</h1>
           </div>
         </div>
-        <nav className="p-6">
+<nav className="p-6">
           <div className="space-y-2">
             <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <ApperIcon name="Home" size={18} />
@@ -79,6 +83,10 @@ const Layout = () => {
             <a href="#" className="flex items-center gap-3 px-3 py-2 bg-primary-50 text-primary-700 rounded-lg">
               <ApperIcon name="CheckSquare" size={18} />
               <span>Tasks</span>
+            </a>
+            <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <ApperIcon name="Users" size={18} />
+              <span>People</span>
             </a>
             <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <ApperIcon name="Archive" size={18} />
@@ -106,9 +114,9 @@ const Layout = () => {
               >
                 <ApperIcon name="Menu" size={20} />
               </Button>
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">Tasks</h2>
-                <p className="text-sm text-gray-600">Manage your daily tasks efficiently</p>
+<div>
+                <h2 className="text-2xl font-bold text-gray-900">TaskFlow</h2>
+                <p className="text-sm text-gray-600">Manage your work efficiently</p>
               </div>
             </div>
             

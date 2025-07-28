@@ -11,7 +11,7 @@ import ResetPassword from '@/components/pages/ResetPassword'
 import PromptPassword from '@/components/pages/PromptPassword'
 import Layout from "@/components/organisms/Layout"
 import TasksPage from "@/components/pages/TasksPage"
-
+import PeoplePage from "@/components/pages/PeoplePage"
 // Create auth context
 export const AuthContext = createContext(null)
 
@@ -124,9 +124,10 @@ function App() {
         <Route path="/error" element={<ErrorPage />} />
         <Route path="/prompt-password/:appId/:emailAddress/:provider" element={<PromptPassword />} />
         <Route path="/reset-password/:appId/:fields" element={<ResetPassword />} />
-        <Route path="/" element={<Layout />}>
+<Route path="/" element={<Layout />}>
           <Route index element={<TasksPage />} />
           <Route path="tasks" element={<TasksPage />} />
+          <Route path="people" element={<PeoplePage />} />
         </Route>
       </Routes>
       <ToastContainer
