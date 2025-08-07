@@ -1,17 +1,20 @@
-import { createContext, useEffect, useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { ToastContainer } from "react-toastify"
-import { setUser, clearUser } from './store/userSlice'
-import Login from '@/components/pages/Login'
-import Signup from '@/components/pages/Signup'
-import Callback from '@/components/pages/Callback'
-import ErrorPage from '@/components/pages/ErrorPage'
-import ResetPassword from '@/components/pages/ResetPassword'
-import PromptPassword from '@/components/pages/PromptPassword'
-import Layout from "@/components/organisms/Layout"
-import TasksPage from "@/components/pages/TasksPage"
-import PeoplePage from "@/components/pages/PeoplePage"
+import 'react-toastify/dist/ReactToastify.css'
+import React, { createContext, useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "@/index.css";
+import Layout from "@/components/organisms/Layout";
+import Login from "@/components/pages/Login";
+import PeoplePage from "@/components/pages/PeoplePage";
+import PromptPassword from "@/components/pages/PromptPassword";
+import ResetPassword from "@/components/pages/ResetPassword";
+import Callback from "@/components/pages/Callback";
+import TasksPage from "@/components/pages/TasksPage";
+import ErrorPage from "@/components/pages/ErrorPage";
+import Signup from "@/components/pages/Signup";
+import { clearUser, setUser } from "@/store/userSlice";
+
 // Create auth context
 export const AuthContext = createContext(null)
 
@@ -26,6 +29,11 @@ function App() {
   
   // Initialize ApperUI once when the app loads
   useEffect(() => {
+    if (!window.ApperSDK) {
+      console.error('ApperSDK not loaded')
+      return
+    }
+    
     const { ApperClient, ApperUI } = window.ApperSDK
     
     const client = new ApperClient({
@@ -40,8 +48,7 @@ function App() {
       view: 'both',
       onSuccess: function (user) {
         setIsInitialized(true)
-        // CRITICAL: This exact currentPath logic must be preserved in all implementations
-        // DO NOT simplify or modify this pattern as it ensures proper redirection flow
+        // CRITICAL: This exact currentPath logic must be preserved
         let currentPath = window.location.pathname + window.location.search
         let redirectPath = new URLSearchParams(window.location.search).get('redirect')
         const isAuthPage = currentPath.includes('/login') || currentPath.includes('/signup') || 
@@ -91,9 +98,10 @@ function App() {
       },
       onError: function(error) {
         console.error("Authentication failed:", error)
+        setIsInitialized(true)
       }
     })
-  }, []) // No props and state should be bound
+  }, [])
   
   // Authentication methods to share via context
   const authMethods = {
@@ -112,7 +120,7 @@ function App() {
   
   // Don't render routes until initialization is complete
   if (!isInitialized) {
-    return <div className="loading flex items-center justify-center p-6 h-full w-full"><svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path></svg></div>
+    return <div className="loading flex items-center justify-center p-6 h-screen w-full"><svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path></svg></div>
   }
   
   return (
@@ -124,7 +132,7 @@ function App() {
         <Route path="/error" element={<ErrorPage />} />
         <Route path="/prompt-password/:appId/:emailAddress/:provider" element={<PromptPassword />} />
         <Route path="/reset-password/:appId/:fields" element={<ResetPassword />} />
-<Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<TasksPage />} />
           <Route path="tasks" element={<TasksPage />} />
           <Route path="people" element={<PeoplePage />} />
@@ -132,7 +140,7 @@ function App() {
       </Routes>
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -140,9 +148,8 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        style={{ zIndex: 9999 }}
       />
-    </AuthContext.Provider>
+</AuthContext.Provider>
   )
 }
 

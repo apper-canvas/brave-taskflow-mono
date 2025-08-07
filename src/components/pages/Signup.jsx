@@ -1,8 +1,12 @@
-import { useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { AuthContext } from '../../App'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useContext } from 'react'
+import { AuthContext } from '@/App'
 
 function Signup() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { isInitialized } = useContext(AuthContext)
   
   useEffect(() => {
